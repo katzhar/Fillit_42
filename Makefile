@@ -3,38 +3,53 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aernie <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: aernie <aernie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/10 12:10:20 by aernie            #+#    #+#              #
-#    Updated: 2019/04/18 22:50:11 by aernie           ###   ########.fr        #
+#    Created: 2019/07/25 16:31:58 by aernie            #+#    #+#              #
+#    Updated: 2019/07/25 16:32:01 by aernie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a 
+.PHONY: all, $(NAME), norm, clean, fclean, re
 
-SRC = ft_isdigit.c ft_isalpha.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_tolower.c ft_toupper.c ft_atoi.c ft_strcmp.c ft_strncmp.c\
-ft_memcmp.c ft_strdup.c ft_strstr.c ft_strnstr.c ft_strchr.c ft_strrchr.c ft_strcpy.c ft_strncpy.c ft_strcat.c ft_strncat.c ft_memcpy.c\
-ft_memccpy.c ft_memchr.c ft_memmove.c ft_memset.c ft_putstr.c ft_putchar.c ft_bzero.c ft_strlen.c ft_strlcat.c ft_strequ.c ft_strnequ.c\
-ft_strmap.c ft_strmapi.c ft_strsub.c ft_strjoin.c ft_strtrim.c ft_strsplit.c ft_itoa.c ft_strnew.c ft_memalloc.c ft_memdel.c ft_strdel.c\
-ft_strclr.c ft_striter.c ft_striteri.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putnbr_fd.c ft_putchar_fd.c ft_putstr_fd.c\
-ft_putendl_fd.c ft_lstadd.c ft_lstnew.c ft_lstmap.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_free.c ft_strpbrk.c ft_isspace.c\
-ft_iswspace.c ft_minint.c ft_isprime.c ft_next_prime.c ft_sqrt.c 
+NAME = fillit
 
-OBJECTS = $(SRC: .c=.o)
+SRC_PATH = ./
+OBJ_PATH = ./objects/
+INC_PATH = ./fillit.h
+LIB_PATH = ./libft/
 
-HEADERS = libft.h 
+SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
+INC = $(addprefix -I, $(INC_PATH))
+
+SRC_NAME =	main.c valid.c list.c coordinate.c map.c move.c
+OBJ_NAME = $(SRC_NAME:.c=.o)
+INC_NAME = fillit.h
+
 
 all: $(NAME)
 
-$(NAME):
-	gcc -c -I $(HEADERS) -Wall -Wextra -Werror $(SRC)
-	ar rc $(NAME) *.o
-	ranlib libft.a
+$(NAME): $(OBJ)
+	make lib_refresh
+	gcc -o $(NAME) $(OBJ) -lm -L $(LIB_PATH) -lft
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	mkdir -p $(OBJ_PATH)
+	gcc -Wall -Werror -Wextra $(INC) -o $@ -c $<
+
+lib_refresh:
+	make -C $(LIB_PATH)
+
+norm:
+	norminette -R CheckForbiddenSourceHeader
 
 clean:
-	rm -f *.o
+	/bin/rm -rf $(OBJ_PATH)
+	make clean -C $(LIB_PATH)
 
-fclean: clean 
-	rm -f libft.a
+fclean: clean
+	/bin/rm -f $(NAME)
+	make fclean -C $(LIB_PATH)
 
 re: fclean all

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aernie <aernie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mannette <mannette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:59:04 by aernie            #+#    #+#             */
-/*   Updated: 2019/07/20 19:20:11 by aernie           ###   ########.fr       */
+/*   Updated: 2019/07/22 21:22:35 by mannette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int							main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	static t_tet			*first;
-    int						fd;
-	int						res;
-	char					file[BUFF_SIZE];
+	static t_tet	*first;
+	int				fd;
+	int				res;
+	char			file[BUFF_SIZE];
 
 	if (argc == 2)
 	{
@@ -31,7 +31,6 @@ int							main(int argc, char **argv)
 			write(1, "error\n", 6);
 			return (1);
 		}
-		printf("%d\n", res);
 		main_move(&first, (res + 1) / 21);
 	}
 	else
