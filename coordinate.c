@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   coordinate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mannette <mannette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aernie <aernie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 18:10:25 by mannette          #+#    #+#             */
-/*   Updated: 2019/07/23 21:16:43 by mannette         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:19:14 by aernie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "./fillit.h"
 
 int			second_steps(t_tet **lst)
 {
